@@ -33,8 +33,7 @@
         </tr>
         <tr
         *ngFor="let user of usuarios; let i = index"
-        [class.selecionadoAtivado]="i == currentIndex"
-        (click)="setActiveUser(user, i)">
+        [class.selecionadoAtivado]="i == currentIndex">
           <td>
             {{ user.login }}
           </td>
