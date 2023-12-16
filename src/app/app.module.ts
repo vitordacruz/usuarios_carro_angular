@@ -11,6 +11,7 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
 import { UsuarioListComponent } from './components/usuario-list/usuario-list.component';
 import { AddUsuarioComponent } from './components/add-usuario/add-usuario.component';
 import { UsuarioDetailsComponent } from './components/usuario-details/usuario-details.component';
+import { UpdateUsuarioComponent } from './components/update-usuario/update-usuario.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UsuarioDetailsComponent } from './components/usuario-details/usuario-de
     TutorialsListComponent,
     UsuarioListComponent,
     AddUsuarioComponent,
-    UsuarioDetailsComponent
+    UsuarioDetailsComponent,
+    UpdateUsuarioComponent
   ],
   imports: [
     BrowserModule,

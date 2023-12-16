@@ -50,6 +50,9 @@
             <a (click)="goToUsuarioDetalhes(user.id)" class="btn btn-primary" role="button">Visualizar</a>
           </td>
           <td style="text-align: center;">
+            <a (click)="goToUsuarioEditar(user.id)" class="btn btn-primary" role="button">Editar</a>
+          </td>
+          <td style="text-align: center;">
             <a (click)="confirmRemove(user.id)" class="btn btn-danger" role="button">Deletar</a>
           </td>
         </tr>
@@ -84,7 +87,6 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="remove(idUsuarioRemove)" data-bs-dismiss="modal">Deletar</button>
           <button type="button" class="btn btn-danger" (click)="closeModalRemove()" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" (click)="closeModalRemove()" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

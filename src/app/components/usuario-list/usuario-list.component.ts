@@ -143,4 +143,13 @@ export class UsuarioListComponent {
     this.openModel();
   }
 
+  goToUsuarioEditar(id?:number): void {
+    if (!id) {
+      this.message = "Selecione um Usuário";
+      this.openModel();
+    } else {
+      this.router.navigate(['/usuarios/add/' + id]);
+    }
+  }
+
 }
