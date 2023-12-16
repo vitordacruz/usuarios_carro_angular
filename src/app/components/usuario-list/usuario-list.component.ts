@@ -12,6 +12,10 @@ export class UsuarioListComponent {
   usuarios?: UsuarioOutputDTO[];
   currentUsuario?: UsuarioOutputDTO;
   currentIndex = -1;
+  showModal = false;
+  showModalRemove = false;
+  message = "";
+  idUsuarioRemove = -1;
 
   login = '';
 
@@ -27,7 +31,9 @@ export class UsuarioListComponent {
         this.usuarios = data;
         console.log(data);
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        this.alertErro(e);
+      }
     });
   }
 
@@ -41,7 +47,9 @@ export class UsuarioListComponent {
         this.usuarios = data;
         console.log(data);
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        this.alertErro(e);
+      }
     });
 
   }
@@ -59,14 +67,80 @@ export class UsuarioListComponent {
     this.router.navigate(['/usuarios/' + id]);
   }
 
+  confirmRemove(id?:number): void {
+    if (id) {
+      this.idUsuarioRemove = id;
+      this.openModalRemove();
+    } else {
+      alert('Selecione um usuário.');
+    }
+  }
+
   remove(id?:number): void {
     this.usuarioService.delete(id).subscribe({
       next: (data) => {
-        console.log("Deletou");
+        console.log("Deletou Usuário");
         this.retrieveUsuarios();
+        this.closeModalRemove();
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        this.alertErro(e);
+      }
     });
+  }
+
+  openModalRemove(): void {
+    const modelDiv = document.getElementById('modalRemove');
+    if(modelDiv!= null) {
+      modelDiv.style.display = 'block';
+      this.showModalRemove = true;
+    }
+  }
+
+  closeModalRemove() {
+    const modelDiv = document.getElementById('modalRemove');
+    if(modelDiv!= null) {
+      modelDiv.style.display = 'none';
+      this.message = "";
+      this.showModalRemove = false;
+      this.idUsuarioRemove = -1;
+    }
+  }
+
+  openModel() {
+    const modelDiv = document.getElementById('myModal');
+    if(modelDiv!= null) {
+      modelDiv.style.display = 'block';
+      this.showModal = true;
+    }
+  }
+
+  closeModel() {
+    const modelDiv = document.getElementById('myModal');
+    if(modelDiv!= null) {
+      modelDiv.style.display = 'none';
+      this.message = "";
+      this.showModal = false;
+    }
+  }
+
+  alertErro(e: any) {
+    console.error(e);
+    if (e && e.error) {
+      console.log("e.error", e.error);
+      if (e.error.message) {
+        this.message = e.error.message;
+      } else if(e.message) {
+        console.log("e.message", e.message);
+        this.message = e.message;
+      } else {
+        console.log("Erro message vazio");
+      }
+    } else if(e.message) {
+      console.log("e.message", e.message);
+      this.message = e.message;
+    }
+    this.openModel();
   }
 
 }
