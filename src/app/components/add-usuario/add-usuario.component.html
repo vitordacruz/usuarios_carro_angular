@@ -1,0 +1,143 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <h4><strong>Usuario</strong></h4>
+      </div>
+      <div class="form-group">
+        <label for="firstName">Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          required
+          [(ngModel)]="usuario.firstName"
+          name="firstName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Sobrenome</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          required
+          [(ngModel)]="usuario.lastName"
+          name="lastName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          required
+          [(ngModel)]="usuario.email"
+          name="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="login">Login</label>
+        <input
+          class="form-control"
+          id="login"
+          required
+          [(ngModel)]="usuario.login"
+          name="login"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          class="form-control"
+          id="password"
+          required
+          [(ngModel)]="usuario.password"
+          type="password"
+          name="password"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="passwordConfirm">Confirmação Senha</label>
+        <input
+          class="form-control"
+          id="passwordConfirm"
+          required
+          [(ngModel)]="passwordConfirm"
+          name="passwordConfirm"
+          type="password"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="birthday">Data Nascimento (dd/MM/yyyy)</label>
+        <input
+          class="form-control"
+          id="birthday"
+          required
+          [(ngModel)]="usuario.birthday"
+          name="birthday"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Telefone</label>
+        <input
+          class="form-control"
+          id="phone"
+          required
+          [(ngModel)]="usuario.phone"
+          name="phone"
+        />
+      </div>
+      <div class="form-group">
+        <h4><strong>Carro</strong></h4>
+      </div>
+      <div class="form-group">
+        <label for="phone">Telefone</label>
+        <input
+          class="form-control"
+          id="phone"
+          required
+          [(ngModel)]="usuario.phone"
+          name="phone"
+        />
+      </div>
+
+      <button (click)="saveUsuario()" class="btn btn-success">Submit</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Usuario foi salvo com sucesso!</h4>
+      <button class="btn btn-success" (click)="newUsuario()">Cadastrar Novo Usuario</button>
+    </div>
+
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Cadastro Usuario</h4>
+            <button type="button" class="btn btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li *ngFor="let message of messagesErrors; let i = index">
+                {{ message }}
+              </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="closeModel()" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overlay" *ngIf="showModal"></div>
+  </div>
+</div>

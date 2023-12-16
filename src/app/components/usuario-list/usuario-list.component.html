@@ -1,0 +1,59 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Busar por login"
+        [(ngModel)]="login"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchLogin()"
+        >
+          Search
+        </button>
+      </div>
+      &nbsp; &nbsp;
+      <a routerLink="/usuarios/add" class="btn btn-danger" role="button">Adicionar Usuarios</a>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <h4>Lista de Usuarios</h4>
+      <table>
+        <tr>
+          <th>Login</th>
+          <th>Nome</th>
+          <th>Sobrenome</th>
+          <th>Qtd. Carros</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr
+        *ngFor="let user of usuarios; let i = index"
+        [class.selecionadoAtivado]="i == currentIndex"
+        (click)="setActiveUser(user, i)">
+          <td>
+            {{ user.login }}
+          </td>
+          <td>
+            {{ user.firstName }}
+          </td>
+          <td>
+            {{ user.lastName }}
+          </td>
+          <td style="text-align: right;">
+            {{ user.cars ? user.cars.length : 0  }}
+          </td>
+          <td style="text-align: center;">
+            <a (click)="goToUsuarioDetalhes(user.id)" class="btn btn-primary" role="button">Visualizar</a>
+          </td>
+          <td style="text-align: center;">
+            <a (click)="remove(user.id)" class="btn btn-danger" role="button">Deletar</a>
+          </td>
+        </tr>
+      </table>
+  </div>
+</div>
