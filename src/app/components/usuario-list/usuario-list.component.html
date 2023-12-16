@@ -51,9 +51,44 @@
             <a (click)="goToUsuarioDetalhes(user.id)" class="btn btn-primary" role="button">Visualizar</a>
           </td>
           <td style="text-align: center;">
-            <a (click)="remove(user.id)" class="btn btn-danger" role="button">Deletar</a>
+            <a (click)="confirmRemove(user.id)" class="btn btn-danger" role="button">Deletar</a>
           </td>
         </tr>
       </table>
   </div>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Erro</h4>
+          <button type="button" class="btn btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            {{ message }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeModel()" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="modalRemove">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Cadastro Usuario</h4>
+          <button type="button" class="btn btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            Tem certeza que deseja deletar o Usuário?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="remove(idUsuarioRemove)" data-bs-dismiss="modal">Deletar</button>
+          <button type="button" class="btn btn-danger" (click)="closeModalRemove()" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="closeModalRemove()" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" *ngIf="showModal || showModalRemove"></div>
 </div>

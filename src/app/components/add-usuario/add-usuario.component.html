@@ -99,14 +99,48 @@
       <div class="form-group">
         <h4><strong>Carro</strong></h4>
       </div>
+
       <div class="form-group">
-        <label for="phone">Telefone</label>
+        <label for="year">Ano</label>
         <input
           class="form-control"
-          id="phone"
+          id="anoCarro"
           required
-          [(ngModel)]="usuario.phone"
-          name="phone"
+          [(ngModel)]="anoCarro"
+          name="anoCarro"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="year">Placa</label>
+        <input
+          class="form-control"
+          id="licensePlate"
+          required
+          [(ngModel)]="carro.licensePlate"
+          name="licensePlate"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="year">Modelo</label>
+        <input
+          class="form-control"
+          id="model"
+          required
+          [(ngModel)]="carro.model"
+          name="model"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="year">Cor</label>
+        <input
+          class="form-control"
+          id="color"
+          required
+          [(ngModel)]="carro.color"
+          name="color"
         />
       </div>
 
