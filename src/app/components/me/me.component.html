@@ -38,6 +38,7 @@
           <th>Placa</th>
           <th>Modelo</th>
           <th>Cor</th>
+          <th></th>
         </tr>
         <tr
         *ngFor="let car of currentUsuario.cars; let i = index">
@@ -53,6 +54,9 @@
           <td>
             {{ car.color  }}
           </td>
+          <td style="text-align: center;">
+            <a (click)="confirmRemove(car.id)" class="btn btn-danger" role="button">Deletar</a>
+          </td>
         </tr>
       </table>
   </div>
@@ -62,6 +66,24 @@
 <div *ngIf="!currentUsuario">
   <br />
   <p>Você não está logado</p>
+</div>
+
+<div class="modal" id="modalRemove">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Cadastro Carro</h4>
+        <button type="button" class="btn btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+          Tem certeza que deseja deletar o Carro?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="removeCarro(idCarroRemove)" data-bs-dismiss="modal">Deletar</button>
+        <button type="button" class="btn btn-danger" (click)="closeModalRemove()" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="modal" id="myModal">
@@ -84,6 +106,6 @@
     </div>
   </div>
 </div>
-<div class="overlay" *ngIf="showModal"></div>
+<div class="overlay" *ngIf="showModal || showModalRemove"></div>
 
 

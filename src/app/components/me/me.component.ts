@@ -2,6 +2,7 @@ import { UsuarioOutputDTO } from './../../models/usuario';
 import { Component } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CarroService } from 'src/app/services/carro.service';
 
 @Component({
   selector: 'app-me',
@@ -13,11 +14,15 @@ export class MeComponent {
 
   messagesErrors: string[] = [];
   showModal = false;
+  idCarroRemove = -1;
+  showModalRemove = false;
+  message = "";
 
   constructor(
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private carroService: CarroService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +45,45 @@ export class MeComponent {
 
   adicionarCarro():void {
     this.router.navigate(['/carros/add']);
+  }
+
+  confirmRemove(id: any): void {
+    if (id) {
+      this.idCarroRemove = id;
+      this.openModalRemove();
+    } else {
+      alert('Selecione um carro.');
+    }
+  }
+
+  removeCarro(id: number): void{
+    this.carroService.delete(id).subscribe({
+      next: (data) => {
+        console.log("Deletou Carro");
+        this.closeModalRemove();
+      },
+      error: (e) => {
+        this.alertErro(e);
+      }
+    });
+  }
+
+  openModalRemove(): void {
+    const modelDiv = document.getElementById('modalRemove');
+    if(modelDiv!= null) {
+      modelDiv.style.display = 'block';
+      this.showModalRemove = true;
+    }
+  }
+
+  closeModalRemove() {
+    const modelDiv = document.getElementById('modalRemove');
+    if(modelDiv!= null) {
+      modelDiv.style.display = 'none';
+      this.message = "";
+      this.showModalRemove = false;
+      this.idCarroRemove = -1;
+    }
   }
 
   openModel() {

@@ -18,4 +18,8 @@ export class CarroService {
     return this.http.post<CarroInput>(this.baseUrl, data);
   }
 
+  delete(id: any): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
 }
