@@ -43,4 +43,18 @@ export class UsuarioService {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
+  logar(login:string, password:string): Observable<LoginResponse> {
+    const data = { login, password };
+    console.log('data', data);
+    return this.http.post<LoginResponse>(environment.apiUrl + "/signin", data);
+  }
+
+  getMe(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/me');
+  }
+
+}
+
+export class LoginResponse {
+  content: string = "";
 }

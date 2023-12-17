@@ -33,8 +33,7 @@
         </tr>
         <tr
         *ngFor="let user of usuarios; let i = index"
-        [class.selecionadoAtivado]="i == currentIndex"
-        (click)="setActiveUser(user, i)">
+        [class.selecionadoAtivado]="i == currentIndex">
           <td>
             {{ user.login }}
           </td>
@@ -49,6 +48,9 @@
           </td>
           <td style="text-align: center;">
             <a (click)="goToUsuarioDetalhes(user.id)" class="btn btn-primary" role="button">Visualizar</a>
+          </td>
+          <td style="text-align: center;">
+            <a (click)="goToUsuarioEditar(user.id)" class="btn btn-primary" role="button">Editar</a>
           </td>
           <td style="text-align: center;">
             <a (click)="confirmRemove(user.id)" class="btn btn-danger" role="button">Deletar</a>
@@ -85,7 +87,6 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" (click)="remove(idUsuarioRemove)" data-bs-dismiss="modal">Deletar</button>
           <button type="button" class="btn btn-danger" (click)="closeModalRemove()" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" (click)="closeModalRemove()" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

@@ -52,6 +52,15 @@ export class UsuarioListComponent {
       }
     });
 
+    this.usuarioService.getMe().subscribe({
+      next: (data) => {
+        console.log('meData', data);
+      },
+      error: (e) => {
+        this.alertErro(e);
+      }
+    });
+
   }
 
   setActiveUser(usuario: UsuarioOutputDTO, index: number): void {
@@ -141,6 +150,15 @@ export class UsuarioListComponent {
       this.message = e.message;
     }
     this.openModel();
+  }
+
+  goToUsuarioEditar(id?:number): void {
+    if (!id) {
+      this.message = "Selecione um Usuário";
+      this.openModel();
+    } else {
+      this.router.navigate(['/usuarios/add/' + id]);
+    }
   }
 
 }
