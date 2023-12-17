@@ -8,3 +8,10 @@ export class Carro {
   color?: string;
   usuario?: Usuario;
 }
+
+export class CarroInput {
+  year?: number;
+  licensePlate?: string;
+  model?: string;
+  color?: string;
+}

@@ -18,6 +18,7 @@ import { ApiInterceptorService } from './services/api-interceptor.service';
 import { JwtModule } from "@auth0/angular-jwt";
 import { environment } from '../environments/environment';
 import { MeComponent } from './components/me/me.component';
+import { AddCarroComponent } from './components/add-carro/add-carro.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MeComponent } from './components/me/me.component';
     UsuarioDetailsComponent,
     UpdateUsuarioComponent,
     LoginComponent,
-    MeComponent
+    MeComponent,
+    AddCarroComponent
   ],
   imports: [
     BrowserModule,

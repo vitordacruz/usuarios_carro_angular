@@ -38,6 +38,10 @@ export class MeComponent {
     });
   }
 
+  adicionarCarro():void {
+    this.router.navigate(['/carros/add']);
+  }
+
   openModel() {
     const modelDiv = document.getElementById('myModal');
     if(modelDiv!= null) {
