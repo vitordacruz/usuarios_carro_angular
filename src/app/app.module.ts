@@ -12,6 +12,9 @@ import { UsuarioListComponent } from './components/usuario-list/usuario-list.com
 import { AddUsuarioComponent } from './components/add-usuario/add-usuario.component';
 import { UsuarioDetailsComponent } from './components/usuario-details/usuario-details.component';
 import { UpdateUsuarioComponent } from './components/update-usuario/update-usuario.component';
+import { LoginComponent } from './components/login/login.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiInterceptorService } from './services/api-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import { UpdateUsuarioComponent } from './components/update-usuario/update-usuar
     UsuarioListComponent,
     AddUsuarioComponent,
     UsuarioDetailsComponent,
-    UpdateUsuarioComponent
+    UpdateUsuarioComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,11 @@ import { UpdateUsuarioComponent } from './components/update-usuario/update-usuar
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ApiInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

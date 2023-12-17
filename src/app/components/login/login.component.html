@@ -1,0 +1,54 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <h4><strong>Login</strong></h4>
+      </div>
+      <div class="form-group">
+        <label for="login">Login</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          required
+          [(ngModel)]="login"
+          name="login"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          type="text"
+          class="form-control"
+          id="password"
+          required
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+        />
+      </div>
+      <button (click)="logar()" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Cadastro Usuario</h4>
+          <button type="button" class="btn btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li *ngFor="let message of messagesErrors; let i = index">
+              {{ message }}
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeModel()" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" *ngIf="showModal"></div>
+</div>

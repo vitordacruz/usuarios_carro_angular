@@ -52,6 +52,15 @@ export class UsuarioListComponent {
       }
     });
 
+    this.usuarioService.getMe().subscribe({
+      next: (data) => {
+        console.log('meData', data);
+      },
+      error: (e) => {
+        this.alertErro(e);
+      }
+    });
+
   }
 
   setActiveUser(usuario: UsuarioOutputDTO, index: number): void {

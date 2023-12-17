@@ -49,7 +49,9 @@ export class AddUsuarioComponent {
         }
 
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        this.alertErro(e);
+      }
     });
   }
 

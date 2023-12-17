@@ -7,6 +7,7 @@ import { UsuarioListComponent } from './components/usuario-list/usuario-list.com
 import { AddUsuarioComponent } from './components/add-usuario/add-usuario.component';
 import { UsuarioDetailsComponent } from './components/usuario-details/usuario-details.component';
 import { UpdateUsuarioComponent } from './components/update-usuario/update-usuario.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'usuarios/add', component: AddUsuarioComponent },
   { path: 'usuarios/add/:id', redirectTo: 'usuarios/update/:id', pathMatch: 'full' },
   { path: 'usuarios/update/:id', component: UpdateUsuarioComponent },
-  { path: 'usuarios/:id', component: UsuarioDetailsComponent }
+  { path: 'usuarios/:id', component: UsuarioDetailsComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
