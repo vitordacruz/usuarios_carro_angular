@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UsuarioService, LoginResponse } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent {
   showModal = false;
 
   constructor(
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private router: Router
   ) {}
 
 
@@ -25,9 +27,21 @@ export class LoginComponent {
       this.usuarioService.logar(this.login, this.password).subscribe({
         next: (data) => {
           console.log(data);
-          localStorage.setItem('api_key', `${data.content}`);
+          if (data.content) {
+            let api_key = "";
+            if (data.content.startsWith("Bearer ")) {
+              api_key = data.content.replace("Bearer ", '');
+            } else {
+              api_key = data.content;
+            }
+            localStorage.setItem('access_token', `${api_key}`);
+            this.router.navigate(['/usuarios']);
+          }
         },
-        error: (e) => this.alertErro(e)
+        error: (e) => {
+          this.alertErro(e),
+          localStorage.removeItem('access_token');
+        }
       });
     }
   }

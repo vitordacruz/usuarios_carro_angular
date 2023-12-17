@@ -1,0 +1,89 @@
+<div *ngIf="currentUsuario && currentUsuario.id">
+  <h4>Usuario</h4>
+  <div>
+    <label><strong>Nome:</strong></label> {{ currentUsuario.firstName }}
+  </div>
+  <div>
+    <label><strong>Sobrenome:</strong></label>
+    {{ currentUsuario.lastName }}
+  </div>
+  <div>
+    <label><strong>E-mail:</strong></label>
+    {{ currentUsuario.email }}
+  </div>
+  <div>
+    <label><strong>Login:</strong></label>
+    {{ currentUsuario.login }}
+  </div>
+  <div>
+    <label><strong>Aniversário:</strong></label>
+    {{ currentUsuario.email }}
+  </div>
+  <div>
+    <label><strong>Telefone:</strong></label>
+    {{ currentUsuario.phone }}
+  </div>
+  <div>
+    <label><strong>Data Nascimento:</strong></label>
+    {{ currentUsuario.birthday }}
+  </div>
+  <br />
+  <div>
+    <h4>Lista de Carros</h4>
+  </div>
+  <div style="margin-top: 30px;">
+      <table>
+        <tr>
+          <th>Ano</th>
+          <th>Placa</th>
+          <th>Modelo</th>
+          <th>Cor</th>
+        </tr>
+        <tr
+        *ngFor="let car of currentUsuario.cars; let i = index">
+          <td>
+            {{ car.year }}
+          </td>
+          <td>
+            {{ car.licensePlate }}
+          </td>
+          <td>
+            {{ car.model }}
+          </td>
+          <td>
+            {{ car.color  }}
+          </td>
+        </tr>
+      </table>
+  </div>
+
+</div>
+
+<div *ngIf="!currentUsuario">
+  <br />
+  <p>Você não está logado</p>
+</div>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Cadastro Usuario</h4>
+        <button type="button" class="btn btn-close" (click)="closeModel()" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li *ngFor="let message of messagesErrors; let i = index">
+            {{ message }}
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModel()" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="overlay" *ngIf="showModal"></div>
+
+

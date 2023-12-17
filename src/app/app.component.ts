@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Usuarios Carro';
+
+  constructor(
+    private usuarioService: UsuarioService
+  ) {}
+
+
+  logout():void  {
+    this.usuarioService.logOut();
+    alert("Você deslogou com sucesso");
+  }
 }
