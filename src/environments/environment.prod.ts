@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080/api',
-  domain: 'localhost:8080'
+  apiUrl: 'https://usuarios-carros.onrender.com/api',
+  domain: 'https://usuarios-carros.onrender.com/usuarios-carros.onrender.com'
  };
