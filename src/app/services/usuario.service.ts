@@ -53,6 +53,10 @@ export class UsuarioService {
     return this.http.get<any>(environment.apiUrl + '/me');
   }
 
+  logOut(): void {
+    localStorage.removeItem('access_token');
+  }
+
 }
 
 export class LoginResponse {

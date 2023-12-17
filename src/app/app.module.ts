@@ -15,6 +15,9 @@ import { UpdateUsuarioComponent } from './components/update-usuario/update-usuar
 import { LoginComponent } from './components/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptorService } from './services/api-interceptor.service';
+import { JwtModule } from "@auth0/angular-jwt";
+import { environment } from '../environments/environment';
+import { MeComponent } from './components/me/me.component';
 
 @NgModule({
   declarations: [
@@ -26,19 +29,27 @@ import { ApiInterceptorService } from './services/api-interceptor.service';
     AddUsuarioComponent,
     UsuarioDetailsComponent,
     UpdateUsuarioComponent,
-    LoginComponent
+    LoginComponent,
+    MeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:8080"],
+        disallowedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    }),
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: ApiInterceptorService,
-    multi: true
-  }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
