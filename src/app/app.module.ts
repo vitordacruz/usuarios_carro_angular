@@ -42,7 +42,7 @@ import { AddCarroComponent } from './components/add-carro/add-carro.component';
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:8080"],
+        allowedDomains: ["localhost:8080", "usuarios-carros.onrender.com"],
         disallowedRoutes: ["http://example.com/examplebadroute/"],
       },
     }),
