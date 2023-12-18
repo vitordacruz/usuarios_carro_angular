@@ -18,15 +18,22 @@ export class AddCarroComponent {
     private carroService: CarroService
   ) {}
 
+  ngOnInit(): void {
+    this.hideLoading();
+  }
+
   saveCarro(): void {
     if (this.validCarro()) {
+      this.showLoading();
       this.carroService.create(this.carro).subscribe({
         next: (res) => {
           console.log(res);
           this.submitted = true;
+          this.hideLoading();
         },
         error: (e) => {
           this.alertErro(e);
+          this.hideLoading();
         }
       });
     }
@@ -117,6 +124,20 @@ export class AddCarroComponent {
       this.messagesErrors.push(e.message);
     }
     this.openModel();
+  }
+
+  showLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = '';
+    }
+  }
+
+  hideLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = 'none';
+    }
   }
 
 

@@ -28,6 +28,7 @@ export class UpdateUsuarioComponent {
   ngOnInit(): void {
 
     const id = this.route.snapshot.params['id'];
+    this.hideLoading();
     if (id) {
       this.getUsuario(this.route.snapshot.params['id']);
     }
@@ -35,12 +36,18 @@ export class UpdateUsuarioComponent {
   }
 
   getUsuario(id: any): void {
+    this.showLoading();
     this.usuarioService.get(id).subscribe({
       next: (data) => {
         console.log(data);
         this.usuario = data;
+        this.hideLoading();
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        console.error(e);
+        this.alertErro(e);
+        this.hideLoading();
+      }
     });
   }
 
@@ -48,13 +55,16 @@ export class UpdateUsuarioComponent {
     if (this.validUsuario()) {
       console.log('this.usuario', this.usuario);
       if (this.usuario.id) {
+        this.showLoading();
         this.usuarioService.update(this.usuario.id, this.usuario).subscribe({
           next: (res) => {
             console.log(res);
             this.submitted = true;
+            this.hideLoading();
           },
           error: (e) => {
             this.alertErro(e);
+            this.hideLoading();
           }
         });
       }
@@ -170,4 +180,19 @@ export class UpdateUsuarioComponent {
     }
     this.openModel();
   }
+
+  showLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = '';
+    }
+  }
+
+  hideLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = 'none';
+    }
+  }
+
 }

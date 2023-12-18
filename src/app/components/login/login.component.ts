@@ -19,11 +19,16 @@ export class LoginComponent {
     private router: Router
   ) {}
 
+  ngOnInit(): void {
+    this.hideLoading();
+  }
+
 
   logar(): void {
     if (this.login.trim() === '' || this.password.trim() === '') {
       alert("Preencha login e senha");
     } else {
+      this.showLoading();
       this.usuarioService.logar(this.login, this.password).subscribe({
         next: (data) => {
           console.log(data);
@@ -36,11 +41,13 @@ export class LoginComponent {
             }
             localStorage.setItem('access_token', `${api_key}`);
             this.router.navigate(['/usuarios']);
+            this.hideLoading();
           }
         },
         error: (e) => {
           this.alertErro(e),
           localStorage.removeItem('access_token');
+          this.hideLoading();
         }
       });
     }
@@ -79,6 +86,20 @@ export class LoginComponent {
       modelDiv.style.display = 'none';
       this.messagesErrors = [];
       this.showModal = false;
+    }
+  }
+
+  showLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = '';
+    }
+  }
+
+  hideLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = 'none';
     }
   }
 

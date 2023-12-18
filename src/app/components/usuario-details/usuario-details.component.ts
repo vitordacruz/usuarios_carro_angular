@@ -19,19 +19,39 @@ export class UsuarioDetailsComponent {
   ) {}
 
   ngOnInit(): void {
-
+    this.hideLoading();
     this.getUsuario(this.route.snapshot.params['id']);
 
   }
 
   getUsuario(id: any): void {
+    this.showLoading()
     this.usuarioService.get(id).subscribe({
       next: (data) => {
         this.currentUsuario = data;
         console.log(data);
+        this.hideLoading();
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        console.error(e);
+        this.hideLoading();
+      }
+
     });
+  }
+
+  showLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = '';
+    }
+  }
+
+  hideLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = 'none';
+    }
   }
 
 }

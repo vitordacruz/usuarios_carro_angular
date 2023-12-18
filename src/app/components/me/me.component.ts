@@ -26,19 +26,22 @@ export class MeComponent {
   ) {}
 
   ngOnInit(): void {
-
+    this.hideLoading();
     this.getMe();
 
   }
 
   getMe(): void {
+    this.showLoading();
     this.usuarioService.getMe().subscribe({
       next: (data) => {
         this.currentUsuario = data;
         console.log(data);
+        this.hideLoading();
       },
       error: (e) => {
         this.alertErro(e);
+        this.hideLoading();
       }
     });
   }
@@ -57,13 +60,16 @@ export class MeComponent {
   }
 
   removeCarro(id: number): void{
+    this.showLoading();
     this.carroService.delete(id).subscribe({
       next: (data) => {
         console.log("Deletou Carro");
         this.closeModalRemove();
+        this.hideLoading();
       },
       error: (e) => {
         this.alertErro(e);
+        this.hideLoading();
       }
     });
   }
@@ -122,4 +128,17 @@ export class MeComponent {
     this.openModel();
   }
 
+  showLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = '';
+    }
+  }
+
+  hideLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = 'none';
+    }
+  }
 }
