@@ -28,7 +28,7 @@ export class AddUsuarioComponent {
   ) {}
 
   ngOnInit(): void {
-
+    this.hideLoading();
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.getUsuario(this.route.snapshot.params['id']);
@@ -38,6 +38,7 @@ export class AddUsuarioComponent {
   }
 
   getUsuario(id: any): void {
+    this.showLoading();
     this.usuarioService.get(id).subscribe({
       next: (data) => {
         console.log(data);
@@ -47,10 +48,12 @@ export class AddUsuarioComponent {
           this.carro = this.usuario.cars[0];
           this.anoCarro = this.carro.year?.toString();
         }
+        this.hideLoading();
 
       },
       error: (e) => {
         this.alertErro(e);
+        this.hideLoading();
       }
     });
   }
@@ -62,23 +65,29 @@ export class AddUsuarioComponent {
       this.usuario.cars.push(this.carro);
 
       if (!this.usuario.id) {
+        this.showLoading();
         this.usuarioService.create(this.usuario).subscribe({
           next: (res) => {
             console.log(res);
             this.submitted = true;
+            this.hideLoading();
           },
           error: (e) => {
             this.alertErro(e);
+            this.hideLoading();
           }
         });
       } else {
+        this.showLoading();
         this.usuarioService.update(this.usuario.id, this.usuario).subscribe({
           next: (res) => {
             console.log(res);
             this.submitted = true;
+            this.hideLoading();
           },
           error: (e) => {
             this.alertErro(e);
+            this.hideLoading();
           }
         });
       }
@@ -233,6 +242,20 @@ export class AddUsuarioComponent {
       this.messagesErrors.push(e.message);
     }
     this.openModel();
+  }
+
+  showLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = '';
+    }
+  }
+
+  hideLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = 'none';
+    }
   }
 
 }

@@ -22,17 +22,21 @@ export class UsuarioListComponent {
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
+    this.hideLoading();
     this.retrieveUsuarios();
   }
 
   retrieveUsuarios(): void {
+    this.showLoading();
     this.usuarioService.getAll().subscribe({
       next: (data) => {
         this.usuarios = data;
         console.log(data);
+        this.hideLoading();
       },
       error: (e) => {
         this.alertErro(e);
+        this.hideLoading();
       }
     });
   }
@@ -41,14 +45,16 @@ export class UsuarioListComponent {
 
     this.currentUsuario = {};
     this.currentIndex = -1;
-
+    this.showLoading();
     this.usuarioService.getByLogin(this.login).subscribe({
       next: (data) => {
         this.usuarios = data;
         console.log(data);
+        this.hideLoading();
       },
       error: (e) => {
         this.alertErro(e);
+        this.hideLoading();
       }
     });
 
@@ -149,6 +155,20 @@ export class UsuarioListComponent {
       this.openModel();
     } else {
       this.router.navigate(['/usuarios/add/' + id]);
+    }
+  }
+
+  showLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = '';
+    }
+  }
+
+  hideLoading(): void {
+    let element = document.getElementById('loading');
+    if (element) {
+      element.style.display = 'none';
     }
   }
 
